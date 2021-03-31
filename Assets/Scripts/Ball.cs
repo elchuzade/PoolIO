@@ -101,14 +101,12 @@ public class Ball : MonoBehaviour
             holePosition = collision.transform.position;
             disabled = true;
             rb.velocity = Vector3.zero;
-            col.enabled = false;
         }
     }
 
     private void Reappear()
     {
         Debug.Log("Reapeaered");
-        col.enabled = true;
         disabled = false;
         idle = true;
         transform.position = Vector3.zero;
