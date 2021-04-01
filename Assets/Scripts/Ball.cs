@@ -104,7 +104,6 @@ public class Ball : MonoBehaviour
             holePosition = collision.transform.position;
             disabled = true;
             rb.velocity = Vector3.zero;
-            col.enabled = false;
         }
     }
 
@@ -115,7 +114,6 @@ public class Ball : MonoBehaviour
 
     private void Reappear()
     {
-        col.enabled = true;
         disabled = false;
         idle = true;
         transform.position = Vector3.zero;
