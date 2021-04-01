@@ -42,7 +42,7 @@ public class Ball : MonoBehaviour
     int touchedHash;
     int score;
 
-    string nickname = "Kamran";
+    string nickname = "Orkhan";
 
     // Position of the hole to suck the ball into
     Vector3 holePosition;
@@ -110,6 +110,11 @@ public class Ball : MonoBehaviour
     public string GetNickname()
     {
         return nickname;
+    }
+
+    public int GetScore()
+    {
+        return score;
     }
 
     private void Reappear()

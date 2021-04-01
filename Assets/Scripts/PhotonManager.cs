@@ -6,6 +6,12 @@ public class PhotonManager : MonoBehaviourPunCallbacks
 {
     [SerializeField] GameObject playerCamera;
     [SerializeField] GameObject players;
+    GameplayStatus gameplayStatus;
+
+    void Awake()
+    {
+        gameplayStatus = FindObjectOfType<GameplayStatus>();
+    }
 
     void Start()
     {
@@ -30,5 +36,11 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         GameObject ballStuff = PhotonNetwork.Instantiate("BallStuff", transform.position, Quaternion.identity);
         playerCamera.transform.SetParent(ballStuff.transform);
         ballStuff.transform.SetParent(players.transform);
+        gameplayStatus.AddPlayer(ballStuff);
+    }
+
+    private void OnDisconnectedFromMasterServer()
+    {
+        gameplayStatus.RemovePlayer();
     }
 }
