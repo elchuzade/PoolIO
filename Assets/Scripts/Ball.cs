@@ -42,6 +42,8 @@ public class Ball : MonoBehaviour
     int touchedHash;
     int score;
 
+    string nickname = "Kamran";
+
     // Position of the hole to suck the ball into
     Vector3 holePosition;
     float holeSuckSpeed = 2;
@@ -53,7 +55,19 @@ public class Ball : MonoBehaviour
 
     void Update()
     {
-        if (!disabled)
+        if (disabled)
+        {
+            if (transform.position != holePosition)
+            {
+                Vector3 movePos = Vector3.MoveTowards(transform.position, holePosition, holeSuckSpeed);
+                transform.position = movePos;
+                transform.localScale *= 0.99f;
+            }
+            else
+            {
+                Reappear();
+            }
+        } else
         {
             // If the ball is moving then it is not idle even if someone else hit you
             if (rb.velocity.magnitude < almostStopped)
@@ -77,17 +91,6 @@ public class Ball : MonoBehaviour
             {
                 GetMouseDragging();
             }
-        } else
-        {
-            if (transform.position != holePosition)
-            {
-                Vector3 movePos = Vector3.MoveTowards(transform.position, holePosition, holeSuckSpeed);
-                transform.position = movePos;
-                transform.localScale *= 0.99f;
-            } else
-            {
-                Reappear();
-            }
         }
     }
 
@@ -105,9 +108,13 @@ public class Ball : MonoBehaviour
         }
     }
 
+    public string GetNickname()
+    {
+        return nickname;
+    }
+
     private void Reappear()
     {
-        Debug.Log("Reapeaered");
         col.enabled = true;
         disabled = false;
         idle = true;
